@@ -1,0 +1,15 @@
+#!/bin/sh
+# Tag and push a release.
+
+git config user.email "ci@archmix.org"
+git config user.name "Circle CI"
+
+mkdir ~/.gem
+echo '---\n:rubygems_api_key: ' $GEM_API_KEY >> ~/.gem/credentials
+chmod 0600 ~/.gem/credentials
+
+set -e
+
+script/bootstrap
+bundle exec rake build
+bundle exec rake release
