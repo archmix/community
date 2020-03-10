@@ -90,6 +90,8 @@ jobs:
     executor: docker-executor
     steps:
       - setup_remote_docker
+      - attach_workspace:
+          at: /tmp/workspace
       - docker_push :
           image_name: $IMAGE_NAME
           image_version: ${CIRCLE_TAG/v/''}
